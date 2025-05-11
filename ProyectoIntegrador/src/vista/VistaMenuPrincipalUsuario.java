@@ -1,26 +1,27 @@
 package vista;
 
 import java.awt.*;
-
 import javax.swing.*;
 
+
 public class VistaMenuPrincipalUsuario extends JFrame {
-	JLabel lblSeleccion;
-	JButton botonMonitor;
-	JButton botonUsuario;
+	JLabel titulo;
 	public VistaMenuPrincipalUsuario() {
 		inicializarComponentes();
 	}
 	public void inicializarComponentes() {
-		setSize(542, 526);
+		setSize(800, 539);
 	    //indicar que se hace cuando se cierra la ventana
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    //centramos la ventana 
 	    setLocationRelativeTo(null);
 	    //establecemos el diseño del layout
 	    getContentPane().setLayout(null);
+	    
+	   
+	    
 	    JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 518, 22);
+		menuBar.setBounds(0, 0, 786, 22);
 		getContentPane().add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Actividades");
@@ -28,6 +29,7 @@ public class VistaMenuPrincipalUsuario extends JFrame {
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Ver todas las actividades");
 		mnNewMenu.add(mntmNewMenuItem);
+		
 		
 		//JSeparator separator = new JSeparator();
 		//mnNewMenu.add(separator);
@@ -40,8 +42,22 @@ public class VistaMenuPrincipalUsuario extends JFrame {
 		JMenu mnNewMenu_2 = new JMenu("Datos Personales");
 		menuBar.add(mnNewMenu_2);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 33, 786, 458);
+		getContentPane().add(scrollPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 234, 230));
+		scrollPane.setViewportView(panel);
+		
+		ImageIcon icono = new ImageIcon(getClass().getResource("/EuroSportsClubsinfondoR.png"));
+        JLabel lblIcono = new JLabel(icono);
+        panel.add(lblIcono);
+        
+		
 	}
 	public void hacerVisible() {
     	setVisible(true);
     }
+
 }

@@ -1,18 +1,19 @@
 package vista;
 
-import java.awt.*;
-
 import javax.swing.*;
 
+import control.ControladorDatosPersonales;
+import control.ControladorNuevaActividad;
+
+import java.awt.*;
+
 public class VistaMenuPrincipalMonitor extends JFrame {
-	JLabel lblSeleccion;
-	JButton botonMonitor;
-	JButton botonUsuario;
-	public VistaMenuPrincipalMonitor() {
+	
+	public VistaMenuPrincipalMonitor(String titulo) {
 		inicializarComponentes();
 	}
 	public void inicializarComponentes() {
-		setSize(542, 526);
+		setSize(800, 539);
 	    //indicar que se hace cuando se cierra la ventana
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    //centramos la ventana 
@@ -20,7 +21,7 @@ public class VistaMenuPrincipalMonitor extends JFrame {
 	    //establecemos el diseño del layout
 	    getContentPane().setLayout(null);
 	    JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 518, 22);
+		menuBar.setBounds(0, 0, 786, 22);
 		getContentPane().add(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Actividades");
@@ -31,6 +32,8 @@ public class VistaMenuPrincipalMonitor extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Nueva Actividad");
 		mnNewMenu.add(mntmNewMenuItem_1);
+		mntmNewMenuItem_1.addActionListener(new ControladorNuevaActividad(this));
+		
 		
 		//JSeparator separator = new JSeparator();
 		//mnNewMenu.add(separator);
@@ -40,11 +43,33 @@ public class VistaMenuPrincipalMonitor extends JFrame {
 		
 		JMenu mnNewMenu_1 = new JMenu("Salas");
 		menuBar.add(mnNewMenu_1);
+		
 		JMenu mnNewMenu_2 = new JMenu("Datos Personales");
 		menuBar.add(mnNewMenu_2);
+		JMenuItem menuItemDatos = new JMenuItem("Ver Datos");
+		mnNewMenu_2.add(menuItemDatos);
+		
+		menuItemDatos.addActionListener(new ControladorDatosPersonales(this));
+		
+		
+		JScrollPane scrollPaneles = new JScrollPane();
+		scrollPaneles.setBounds(0, 33, 786, 458);
+		getContentPane().add(scrollPaneles);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 234, 230));
+		scrollPaneles.setViewportView(panel);
+
+		
+		ImageIcon icono = new ImageIcon(getClass().getResource("/EuroSportsClubsinfondoR.png"));
+        JLabel lblIcono = new JLabel(icono);
+        panel.add(lblIcono);
+        
 		
 	}
 	public void hacerVisible() {
     	setVisible(true);
     }
+	
+	
 }
