@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS  ACTIVIDAD;
 DROP TABLE IF EXISTS  USUARIO;
 DROP TABLE IF EXISTS  SALA;
+DROP TABLE IF EXISTS INSCRIPCION;
 
 -- Creamos la tabla usuario que tiene id, numero de matricula, nombre y apellidos, y ciclo, el id es el primary key
 CREATE TABLE USUARIO(
@@ -37,6 +38,15 @@ CREATE TABLE ACTIVIDAD(
     CONSTRAINT SALA_FK FOREIGN KEY (ID_SALA) REFERENCES SALA (ID_SALA) ON DELETE CASCADE
 );
 
+CREATE TABLE INSCRIPCION (
+    ID_USUARIO INT,
+    ID_ACTIVIDAD INT,
+    FECHA_INSCRIPCION DATE,
+    PRIMARY KEY (ID_USUARIO, ID_ACTIVIDAD),
+    FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID_USUARIO) ON DELETE CASCADE,
+    FOREIGN KEY (ID_ACTIVIDAD) REFERENCES ACTIVIDAD(ID_ACTIVIDAD) ON DELETE CASCADE
+);
+
 -- insertamos los datos a la tabla usuario
 INSERT INTO USUARIO VALUES (1, 11111111,'Pedro Sanchez', 'DAM', 'vivamarruecos');
 INSERT INTO USUARIO VALUES (2, 22222222,'Santiago Abascal', 'DAW', 'vivaespaña');
@@ -47,20 +57,26 @@ INSERT INTO USUARIO VALUES (6, 66666666,'Puff Diddy', 'Educacion Infantil', 'bab
 
 
 -- insertamos los datos a la tabla sala
-INSERT INTO SALA VALUES (1,'sala de maquinas',30);
-INSERT INTO SALA VALUES (2,'pista de basket',20);
-INSERT INTO SALA VALUES (3,'pista de padel',4);
-INSERT INTO SALA VALUES (4,'piscina polideportivo',100);
-INSERT INTO SALA VALUES (5,'sala de pilates',20);
-INSERT INTO SALA VALUES (6,'campo de futbol',22);
+INSERT INTO SALA VALUES (1,'Sala de máquinas',30);
+INSERT INTO SALA VALUES (2,'Pista de baloncesto',20);
+INSERT INTO SALA VALUES (3,'Pista de pádel',4);
+INSERT INTO SALA VALUES (4,'Piscina polideportivo',100);
+INSERT INTO SALA VALUES (5,'Sala multiusos',20);
+INSERT INTO SALA VALUES (6,'Campo de fútbol',22);
+INSERT INTO SALA VALUES (7,'Pista de atletismo',8);
+INSERT INTO SALA VALUES (8,'Pista de tenis',4);
+
 
 -- insertamos los datos a la tabla actividad
-INSERT INTO ACTIVIDAD VALUES (1, 'sesion de entrenamiento', 30, '2025-04-15', '10:00:00', 3, 1);
-INSERT INTO ACTIVIDAD VALUES (2, 'partido de basket', 20, '2025-04-16', '11:30:00', 4, 2);
-INSERT INTO ACTIVIDAD VALUES (3, 'partido de padel', 4, '2025-04-17', '09:00:00', 3, 3);
-INSERT INTO ACTIVIDAD VALUES (4, 'clase natacion', 100, '2025-04-18', '12:00:00', 4, 4);
-INSERT INTO ACTIVIDAD VALUES (5, 'clase de pilates', 20, '2025-04-19', '08:00:00', 3, 5);
-INSERT INTO ACTIVIDAD VALUES (6, 'partido de futbol', 22, '2025-04-20', '17:00:00', 4, 6);
+INSERT INTO ACTIVIDAD VALUES (1, 'Sesión de entrenamiento', 30, '2025-04-15', '10:00:00', 3, 1);
+INSERT INTO ACTIVIDAD VALUES (2, 'Partido de baloncesto', 20, '2025-04-16', '11:30:00', 4, 2);
+INSERT INTO ACTIVIDAD VALUES (3, 'Partido de pádel', 4, '2025-04-17', '09:00:00', 3, 3);
+INSERT INTO ACTIVIDAD VALUES (4, 'Clase natación', 100, '2025-04-18', '12:00:00', 4, 4);
+INSERT INTO ACTIVIDAD VALUES (5, 'Clase de pilates', 20, '2025-04-19', '08:00:00', 3, 5);
+INSERT INTO ACTIVIDAD VALUES (6, 'Partido de fútbol', 22, '2025-04-20', '17:00:00', 4, 6);
+INSERT INTO ACTIVIDAD VALUES (7, 'Entrenamiento de atletismo', 8, '2025-05-23', '10:00:00', 3, 7);
+INSERT INTO ACTIVIDAD VALUES (8, 'Partido de tenis', 4, '2025-05-22', '10:00:00', 4, 8);
+
 
 
 

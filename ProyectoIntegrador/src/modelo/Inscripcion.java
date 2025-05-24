@@ -1,30 +1,55 @@
 package modelo;
 
+import java.time.LocalDate;
+
 public class Inscripcion {
-	private String actividad;
-    private String id; // Puede ser idUsuario o similar
+	private int idInscripcion;
+    private Usuario usuario; // Puede ser idUsuario o similar
+    private Actividad actividad;
+    private LocalDate fechaInscripcion;
 
     // Constructor
-    public Inscripcion(String actividad, String id) {
-        this.actividad = actividad;
-        this.id = id;
+    public Inscripcion(int idInscripcion, Usuario usuario, Actividad actividad, LocalDate fechaInscripcion) {
+    	this.idInscripcion= idInscripcion;
+    	this.usuario=usuario;
+    	this.actividad=actividad;
+    	this.fechaInscripcion= fechaInscripcion;
+      
     }
+
+	public int getIdInscripcion() {
+		return idInscripcion;
+	}
+
+	public void setIdInscripcion(int idInscripcion) {
+		this.idInscripcion = idInscripcion;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Actividad getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
+	}
+
+	public LocalDate getFechaInscripcion() {
+		return fechaInscripcion;
+	}
+
+	public void setFechaInscripcion(LocalDate fechaInscripcion) {
+		this.fechaInscripcion = fechaInscripcion;
+	}
 
     // Getters y setters
-    public String getActividad() {
-        return actividad;
-    }
-
-    public void setActividad(String actividad) {
-        this.actividad = actividad;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+   
 
 }

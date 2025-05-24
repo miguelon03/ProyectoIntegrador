@@ -3,11 +3,15 @@ package vista;
 import java.awt.*;
 import javax.swing.*;
 
+import modelo.Usuario;
+
 public class VistaEleccion extends JFrame {
-	JButton botonMonitor;
-	JButton botonUsuario;
+	private JButton botonMonitor;
+	private JButton botonUsuario;
 	JLabel lblAcceso;
-	public VistaEleccion () {
+	private Usuario usuario;
+	public VistaEleccion (Usuario usuario) {
+		this.usuario=usuario;
 		getContentPane().setBackground(new Color(254, 235, 235));
     	inicializarComponentes();
     }
@@ -22,22 +26,23 @@ public class VistaEleccion extends JFrame {
         //establecemos el diseño del layout
         getContentPane().setLayout(null);
         // Creamos el boton
-        botonMonitor = new JButton("Monitor");
-        botonMonitor.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        botonMonitor.setBackground(new Color(255, 0, 0));
+        setBotonMonitor(new JButton("Monitor"));
+        getBotonMonitor().setFont(new Font("Tahoma", Font.PLAIN, 16));
+        botonMonitor.setFocusPainted(false);
+        getBotonMonitor().setBackground(new Color(255, 0, 0));
         //lo colocamos en la ventana
-        botonMonitor.setBounds(83, 379, 140, 63);
+        getBotonMonitor().setBounds(83, 379, 140, 63);
         //añadimos el botón de monitor
-        getContentPane().add(botonMonitor);
+        getContentPane().add(getBotonMonitor());
         
         //creamos el boton de usuario
-        botonUsuario = new JButton("Usuario");
-        botonUsuario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        botonUsuario.setBackground(new Color(255, 0, 0));
+        setBotonUsuario(new JButton("Usuario"));
+        getBotonUsuario().setFont(new Font("Tahoma", Font.PLAIN, 16));
+        getBotonUsuario().setBackground(new Color(255, 0, 0));
         //le damos tamaño
-        botonUsuario.setBounds(278, 379, 140, 63);
+        getBotonUsuario().setBounds(278, 379, 140, 63);
         //añadimos el boton de usuario
-        getContentPane().add(botonUsuario);
+        getContentPane().add(getBotonUsuario());
         
         lblAcceso = new JLabel("¿Accedes como usuario o monitor?");
         //establecemos el font
@@ -52,4 +57,26 @@ public class VistaEleccion extends JFrame {
         lblIcono.setBounds(130, 11, 245, 245);
         getContentPane().add(lblIcono);
     }
+    
+    public void hacerVisible() {
+    	setVisible(true);
+    }
+	public JButton getBotonMonitor() {
+		return botonMonitor;
+	}
+	public void setBotonMonitor(JButton botonMonitor) {
+		this.botonMonitor = botonMonitor;
+		botonMonitor.setForeground(new Color(255, 255, 255));
+	}
+	public JButton getBotonUsuario() {
+		return botonUsuario;
+	}
+	public void setBotonUsuario(JButton botonUsuario) {
+		this.botonUsuario = botonUsuario;
+		botonUsuario.setForeground(new Color(255, 255, 255));
+	}
+	
+	public Usuario getUsuario() {
+	    return usuario;
+	}
 }

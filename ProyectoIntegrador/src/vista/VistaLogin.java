@@ -29,11 +29,11 @@ public class VistaLogin extends JFrame {
         //establecemos el diseño del layout
         getContentPane().setLayout(null);
         // Creamos el label y y el cudro de texto para poner el usuario
-        lblUsuario = new JLabel("Usuario");
+        lblUsuario = new JLabel("ID Usuario");
         //establecemos el font
-        lblUsuario.setFont(new Font("Arial", Font.BOLD, 18));
+        lblUsuario.setFont(new Font("Arial", Font.BOLD, 16));
         //lo colocamos en la ventana
-        lblUsuario.setBounds(65, 267, 78, 52);
+        lblUsuario.setBounds(65, 267, 114, 52);
         //añadimos el label de usuario
         getContentPane().add(lblUsuario);
         
@@ -49,7 +49,7 @@ public class VistaLogin extends JFrame {
         //creamos el label de la contraseña
         lblPassword = new JLabel("Contraseña");
         //establecemos el font
-        lblPassword.setFont(new Font("Arial", Font.BOLD, 18));
+        lblPassword.setFont(new Font("Arial", Font.BOLD, 16));
         //lo colocamos en la ventana
         lblPassword.setBounds(65,335,132,100);
         //añadimos el label de usuario
@@ -66,8 +66,9 @@ public class VistaLogin extends JFrame {
         
         
         //creamos el boton de incicio de sesion
-        btnInicioSesion = new JButton("Iniciar Sesion");
+        btnInicioSesion = new JButton("Iniciar sesión");
         btnInicioSesion.setBounds(143, 459, 200, 52);
+        btnInicioSesion.setFocusPainted(false);
         //establecemos el font
         btnInicioSesion.setFont(new Font("Arial", Font.BOLD, 18));
         getContentPane().add(btnInicioSesion);

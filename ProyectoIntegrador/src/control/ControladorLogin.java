@@ -7,13 +7,18 @@ import java.sql.Connection;
 import javax.swing.*;
 
 import bbdd.AccesoBBDDLogin;
+import modelo.Usuario;
+import vista.VistaEleccion;
 import vista.VistaLogin;
 import vista.VistaMenuPrincipalMonitor;
+import vista.VistaMenuPrincipalUsuario;
 
 
 public class ControladorLogin implements ActionListener {
 	private VistaLogin ventLogin;
 	private VistaMenuPrincipalMonitor ventPpalM;
+	private VistaMenuPrincipalUsuario ventPpalU;
+	private VistaEleccion ventEleccion;
 	
 	public ControladorLogin(VistaLogin ventLogin) {
 		this.ventLogin=ventLogin;
@@ -44,13 +49,36 @@ public class ControladorLogin implements ActionListener {
 			// comprobamos el login
 			if (Login) {
 				JOptionPane.showMessageDialog(ventLogin, "Inicio de sesión correcto");
+				
+				 conn = acceso.getConexion();
+				    //String ciclo = acceso.obtenerCicloUsuario(conn, user);
+				    //acceso.terminarConexion(conn);
+				 Usuario usuarioObj = acceso.obtenerUsuarioCompleto(conn, user);
+				    acceso.terminarConexion(conn);
+				
 				ventLogin.dispose();
-				ventPpalM= new VistaMenuPrincipalMonitor("EurosportsClub");
-				ventPpalM.hacerVisible();
+				
+				/*Aquí necesito llamar a un metodo de la clase AccesoBBDDLogin para realizar una consulta de que si el ciclo del usuario es TAFAD
+				 * se abra la pestaña de vista de eleccion ya que los usuarios de este ciclo pueden entrar a la app
+				 * como usuarios normales o como monitores
+				*/
+				if ("TAFD".equalsIgnoreCase(usuarioObj.getCiclo())) {
+			        // Si el ciclo es TAFD, mostrar la vista de elección
+			        ventEleccion = new VistaEleccion(usuarioObj); // Si necesita el ID del usuario
+			        ventEleccion.getBotonMonitor().addActionListener(new ControladorBotonMonitor(ventEleccion, usuarioObj));
+			        ventEleccion.getBotonUsuario().addActionListener(new ControladorBotonUsuario(ventEleccion, usuarioObj));
+			        ventEleccion.hacerVisible();
+			    } else {
+			        // Si no es TAFD, ir al menú principal normal de usuario
+			        ventPpalU = new VistaMenuPrincipalUsuario(usuarioObj);
+			        ventPpalU.hacerVisible();
+			    }
+				
+				
 			} else
 			JOptionPane.showMessageDialog(ventLogin, "Contraseña incorrecta. Inténtalo de nuevo");
 
-			// si el usuario se queda sin intentos
+			
 
 		} else
 			JOptionPane.showMessageDialog(ventLogin, "Error de conexión con la BBDD");
