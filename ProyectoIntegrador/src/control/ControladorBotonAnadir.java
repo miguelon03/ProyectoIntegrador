@@ -51,6 +51,11 @@ public class ControladorBotonAnadir implements ActionListener {
                 JOptionPane.showMessageDialog(panel, "Ya existe una actividad con ese nombre en esa fecha y hora.", "Actividad duplicada", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            
+            if (acceso.monitorTieneActividadEnHorario(conn, monitor.getIdUsuario(), fecha, hora)) {
+                JOptionPane.showMessageDialog(panel, "Tienes otra actividad con esta fecha y hora.", "Solapamiento", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
 
             // Insertar nueva actividad
             boolean insertada = acceso.insertarNuevaActividad(conn, actividad, fecha, hora, monitor.getIdUsuario(), sala.getIdSala(),capacidad);

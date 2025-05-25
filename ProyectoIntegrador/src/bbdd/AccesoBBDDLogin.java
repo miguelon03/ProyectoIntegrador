@@ -471,7 +471,7 @@ public class AccesoBBDDLogin {
 		}
 		
 		
-		//MÉTODO PARA COMOROBAR SI UNA ACTIVIDAD ESTÁ DUPLICADA
+		//MÉTODO PARA COMOROBAR SI UN MISMO TIPO DE ACTIVIDAD ESTÁ DUPLICADA
 		public boolean existeActividadEnMismoHorario(Connection conn, String nombreActividad, String fecha, String hora) {
 		    boolean existe = false;
 
@@ -563,6 +563,52 @@ public class AccesoBBDDLogin {
 		        return false;
 		    }
 		}
+		
+		
+		//MÉTODO PARA COMRPOBRAR SI EL MONITOR TIENE CUALQUIER ACTIVIDAD EN ESE HORARIO AL CREAR NUEVA ACTIVIDAD
+		//Se usa al crear una actividad, en el controlador del botón añadir
+		public boolean monitorTieneActividadEnHorario(Connection conn, int idMonitor, String fecha, String hora) {
+		    String sql = "SELECT COUNT(*) FROM actividad WHERE ID_MONITOR = ? AND FECHA = ? AND HORA = ?";//cuenta las filas
+		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+		        stmt.setInt(1, idMonitor);
+		        stmt.setString(2, fecha);
+		        stmt.setString(3, hora);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next() && rs.getInt(1) > 0) {
+		            return true; // Ya tiene una actividad en ese horario
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return false;
+		}
+		
+		
+		//MÉTODO PARA COMPROBAR SI EL MONITOR TIENE CUALQUIER ACTIVIDAD EN ESE HORARIO AL CREAR NUEVA ACTIVIDAD EXCLYENDO LA ACTIVIDAD QUE SE ESTÁ EDITANDO
+		//Se usa al editar una actividad, en el controlador del botón guardar cambios.
+		public boolean monitorTieneOtraActividadEnHorario(Connection conn, int idMonitor, String fecha, String hora, int idActividadActual) {
+		    String sql = """
+		        SELECT COUNT(*) FROM actividad
+		        WHERE ID_MONITOR = ? AND FECHA = ? AND HORA = ? AND ID_ACTIVIDAD != ? 
+		    """;
+		    //El id_actividad no puede ser igual al de la actividad que se está editando porque si no siempre
+		    //habría una colisión consigo misa.
+		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+		        stmt.setInt(1, idMonitor);
+		        stmt.setString(2, fecha);
+		        stmt.setString(3, hora);
+		        stmt.setInt(4, idActividadActual);
+		        ResultSet rs = stmt.executeQuery();
+		        if (rs.next() && rs.getInt(1) > 0) {
+		            return true;
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+		    return false;
+		}
+
+
 
 		
 		

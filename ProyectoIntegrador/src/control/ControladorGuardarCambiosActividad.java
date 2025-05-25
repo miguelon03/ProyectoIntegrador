@@ -35,13 +35,14 @@ public class ControladorGuardarCambiosActividad implements ActionListener {
         AccesoBBDDLogin acceso = new AccesoBBDDLogin();
         try (Connection conn = acceso.getConexion()) {
 
-            boolean conflicto = acceso.existeActividadEnMismoHorario(conn, actividad.getNombreActividad(), nuevaFecha, nuevaHora);
+        	 boolean monitorOcupado = acceso.monitorTieneOtraActividadEnHorario(conn,actividad.getUsuario().getIdUsuario(),nuevaFecha,nuevaHora,actividad.getIdActividad());
+        	 
+        	 if (monitorOcupado) {
+                 JOptionPane.showMessageDialog(panel, "Ya existe otra actividad en ese horario", "Conflicto", JOptionPane.ERROR_MESSAGE);
+                 return;
+             }
+          
 
-            // Si ya existe otra actividad en ese horario con el mismo nombre, y no es la misma que se está editando
-            if (conflicto && (!nuevaFecha.equals(actividad.getFecha()) || !nuevaHora.equals(actividad.getHora() + ":00"))) {
-                JOptionPane.showMessageDialog(panel, "Ya existe otra actividad del mismo tipo en ese horario.", "Conflicto", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
 
             boolean actualizado = acceso.actualizarFechaHoraActividad(conn, actividad.getIdActividad(), nuevaFecha, nuevaHora);
 
