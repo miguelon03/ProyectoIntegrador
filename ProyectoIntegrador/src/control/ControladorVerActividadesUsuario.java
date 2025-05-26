@@ -11,6 +11,17 @@ import modelo.Usuario;
 import vista.PanelVerActividadesUsuario;
 import vista.VistaMenuPrincipalUsuario;
 
+/**
+ * Controlador que permite a los usuarios visualizar todas las actividades disponibles en el sistema.
+ * Recupera la información desde la base de datos y actualiza el panel principal del usuario
+ * con una lista de actividades a las que puede inscribirse.
+ * 
+ * Esta clase facilita la interacción del usuario con las actividades planificadas por los monitores.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorVerActividadesUsuario implements ActionListener {
 
     private VistaMenuPrincipalUsuario vista;

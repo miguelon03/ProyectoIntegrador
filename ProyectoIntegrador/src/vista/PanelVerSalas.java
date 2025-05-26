@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Panel que muestra un lista con información sobre las salas.
+ *
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelVerSalas extends JPanel {
 
     private JList<String> listaSalas;

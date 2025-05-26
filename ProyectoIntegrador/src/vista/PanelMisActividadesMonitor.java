@@ -7,12 +7,20 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 import control.ControladorBorrar;
-import control.ControladorEditar;
 import control.ControladorEditarActividadMonitor;
 import control.ControladorGuardarCambiosActividad;
 import modelo.Actividad;
 
-
+/**
+ * Panel que muestra al monitor la lista de actividades que ha creado.
+ * 
+ * Permite visualizar información relevante de cada actividad como nombre, sala, fecha y hora.
+ * Incluye botones para editar o eliminar la actividad seleccionada de la lista.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelMisActividadesMonitor extends JPanel {
 	
 	    private List<Actividad> actividades;

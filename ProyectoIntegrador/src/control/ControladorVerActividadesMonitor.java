@@ -11,6 +11,17 @@ import modelo.Actividad;
 import vista.PanelVerActividadesMonitor;
 import vista.VistaMenuPrincipalMonitor;
 
+/**
+ * Controlador que muestra al monitor todas las actividades registradas en el sistema,
+ * independientemente de si las ha creado él o no.
+ * Recupera los datos desde la base de datos y actualiza el panel principal con la vista correspondiente.
+ * 
+ * Esta funcionalidad permite a los monitores consultar la planificación global de actividades.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorVerActividadesMonitor implements ActionListener {
 	
 	private VistaMenuPrincipalMonitor vista;

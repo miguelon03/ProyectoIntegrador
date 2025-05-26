@@ -8,6 +8,16 @@ import javax.swing.JPanel;
 
 import modelo.Actividad;
 
+/**
+ * Panel que muestra al usuario la lista de actividades en las que está inscrito.
+ * 
+ * Permite visualizar detalles básicos como nombre de la actividad, sala, fecha y hora.
+ * También proporciona un botón para cancelar la inscripción de una actividad seleccionada.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelMisActividadesUsuario extends JPanel {
 	    private DefaultListModel<String> modeloLista;
 	    private JList<String> listaActividades;

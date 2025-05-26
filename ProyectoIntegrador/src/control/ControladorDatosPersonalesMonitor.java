@@ -8,6 +8,16 @@ import javax.swing.*;
 import vista.PanelDatosPersonales;
 import vista.VistaMenuPrincipalMonitor;
 
+/**
+ * Controlador que permite mostrar los datos personales del monitor en su panel correspondiente.
+ * Recupera la información del monitor que ha iniciado sesión y la muestra en el panel de datos personales.
+ *
+ * Se utiliza dentro del menú principal del monitor para acceder a sus datos personales.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorDatosPersonalesMonitor implements ActionListener {
 	private VistaMenuPrincipalMonitor vista;
 	

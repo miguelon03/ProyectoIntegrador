@@ -12,6 +12,18 @@ import modelo.Usuario;
 import vista.PanelNuevaActividad;
 import vista.VistaMenuPrincipalMonitor;
 
+/**
+ * Controlador que gestiona la creación de nuevas actividades por parte del monitor.
+ * Carga las salas disponibles desde la base de datos y presenta el panel de creación.
+ * También se encarga de asociar el botón "Añadir" al proceso de validación e inserción
+ * de la nueva actividad en la base de datos.
+ *
+ * Evita solapamientos de actividades del mismo monitor en el mismo horario.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorNuevaActividad implements ActionListener {
 
     private VistaMenuPrincipalMonitor vista;

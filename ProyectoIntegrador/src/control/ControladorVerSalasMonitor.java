@@ -11,6 +11,17 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Controlador encargado de mostrar al monitor la lista de salas disponibles en el sistema.
+ * Se conecta a la base de datos para obtener los datos de todas las salas y actualiza
+ * el panel principal con una vista que las presenta al usuario.
+ * 
+ * Este controlador proporciona una visión general de los espacios disponibles para programar actividades.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorVerSalasMonitor implements ActionListener {
 
     private VistaMenuPrincipalMonitor vista;

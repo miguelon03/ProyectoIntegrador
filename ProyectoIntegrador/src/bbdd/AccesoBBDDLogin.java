@@ -20,6 +20,16 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Esta clase se encarga de gestionar la conexión con la base de datos,
+ * así como realizar consultas relacionadas con usuarios, actividades y salas.
+ * Proporciona métodos para loguear usuarios, gestionar inscripciones
+ * y consultar información de actividades y salas.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class AccesoBBDDLogin {
 	
 	 private String driver = "com.mysql.cj.jdbc.Driver";
@@ -53,8 +63,12 @@ public class AccesoBBDDLogin {
 			return con;
 		}
 		
-		//método para comprobar si el login es correcto
-		public boolean comrobarLogIn(Connection conn, String IdUsuario, String password) {
+		/*
+		 * Método para comprobar si el login es correcto
+		 * -llamado en ControladorLogin
+		 */
+		
+		public boolean comprobarLogIn(Connection conn, String IdUsuario, String password) {
 			
 			//booleano que devuelve si el login se completó correctamente o no
 			boolean logueado = false;
@@ -63,9 +77,11 @@ public class AccesoBBDDLogin {
 				//creamos un statement
 				Statement stmt= conn.createStatement();
 				//ejecutamos la consulta
+				//el ID_Usuario de la base de datos debe ser igual a la variable IdUsuario que se introduce en el login
+				//la contraseña  de la base de datos debe ser igual a la variable password que se introduce en el login
 				ResultSet resultados = stmt.executeQuery("SELECT * FROM usuario WHERE ID_USUARIO = '"+IdUsuario+"' AND PASSWORD = '"+password+"'");
 				
-				//si hay resultados, el usuario se ha logueado correctamente (loguesdo = verdadero)
+				//si hay resultados, el usuario se ha logueado correctamente (logueado = verdadero)
 				if(resultados.next()) {
 					logueado=true;
 				}
@@ -80,7 +96,7 @@ public class AccesoBBDDLogin {
 			
 		}
 		
-		//método para terminar la conexion
+		//Método para terminar la conexion
 		public void terminarConexion(Connection conn) {
 			try {
 				conn.close();
@@ -89,33 +105,18 @@ public class AccesoBBDDLogin {
 			}
 		}
 		
-		//METODO PARA OBTENER EL CICLO DEL USUARIO
-		public String obtenerCicloUsuario(Connection conn, String IdUsuario) {
-		    String ciclo = null;
-		    try {
-		        Statement stmt = conn.createStatement();
-		        ResultSet rs = stmt.executeQuery("SELECT CICLO FROM usuario WHERE ID_USUARIO = '" + IdUsuario + "'");
-		        if (rs.next()) {
-		            ciclo = rs.getString("CICLO");
-		        }
-		        rs.close();
-		        stmt.close();
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		    }
-		    return ciclo;
-		}
-		
 		
 		
 		//MÉTODO PARA OBTENER EL USUARIO COMPLETO
+		//-llamado en ControladorLogin
 		public Usuario obtenerUsuarioCompleto(Connection conn, String idUsuario) {
 		    Usuario usuario = null;
 		    try {
 		        Statement stmt = conn.createStatement();
 		        ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE ID_USUARIO = '" + idUsuario + "'");
 		        if (rs.next()) {
-		            usuario = new Usuario(
+		            //Creamos un objeto usuario con los datos de la base de datos
+		        	usuario = new Usuario(
 		                rs.getInt("ID_USUARIO"),
 		                rs.getString("N_MATRICULA"),
 		                rs.getString("NOM"),
@@ -135,6 +136,8 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA OBTENER LAS ACTIVIDADES QUE PERTENECEN A UN MONITOR
+		//-llamado en ControladorMisActividadesMonitor para obtener la lista de actividades
+		//-llamado en ControladorGuardarCambiosActividad  para obetener la lista de actividades una vez guardados los cambios
 		public ArrayList<Actividad> obtenerActividadesDeMonitor(Connection conn, int idMonitor) {
 		    ArrayList<Actividad> listaActividades = new ArrayList<>();
 
@@ -200,6 +203,7 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA OBTENER TODAS LAS ACTIVIDADES
+		//-llamado en los controladores de VerActividades para crear la lista de actividades
 		public ArrayList<Actividad> obtenerTodasLasActividades(Connection conn) {
 		    ArrayList<Actividad> listaActividades = new ArrayList<>();
 
@@ -261,6 +265,7 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA INSICRIBIR AL USUARIO EN UNA ACTIVIDAD
+		//-llamado en controladorInscripcion
 		public boolean inscribirUsuarioEnActividad(Connection conn, int idUsuario, int idActividad) {
 		    boolean exito = false;
 
@@ -296,7 +301,7 @@ public class AccesoBBDDLogin {
 		        rsAforo.close();
 		        psAforo.close();
 
-		        //Contaos cuantas inscripciones hay actualmente de esa actividad
+		        //Contamos cuantas inscripciones hay actualmente de esa actividad
 		        String inscritos = "SELECT COUNT(*) FROM INSCRIPCION WHERE ID_ACTIVIDAD = ?";
 		        PreparedStatement psContador = conn.prepareStatement(inscritos);
 		        psContador.setInt(1, idActividad);
@@ -339,6 +344,7 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PAR OBTENER LAS ACTIVIDADES EN LA QUE SE HA INSCRITO UN USUARIO
+		//-llamado en ControladorMisActividadesUsuario para crear la lista de actividades
 		public ArrayList<Actividad> obtenerActividadesInscritasDeUsuario(Connection conn, int idUsuario) {
 		    ArrayList<Actividad> listaActividades = new ArrayList<>();
 
@@ -402,6 +408,7 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA BORRAR LA INSCRIPCION DE UN USUARIO EN UNA ACTIVIDAD
+		//-llamado en ControladorBorrarInscripcion
 		public boolean borrarInscripcionUsuario(Connection conn, int idUsuario, int idActividad) {
 		    boolean exito = false;
 
@@ -424,6 +431,8 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA OBTENER UNA LISTA DE LAS SALAS
+		//-llamado en los controladores de VerSalasMonitor y VerSalasUsuario para crear
+		//la lista de salas
 		public List<Sala> obtenerTodasLasSalas(Connection conn) {
 		    List<Sala> salas = new ArrayList<>();
 
@@ -453,6 +462,7 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA INSERTAR UNA ACTIVIDAD NUEVA EN LA BASE DE DATOS
+		//-llamado en ControladorBotonAnadir
 		public boolean insertarNuevaActividad(Connection conn, String nombreActividad, String fecha, String hora, int idMonitor, int idSala, int capacidad) {
 		    String sql = "INSERT INTO actividad (NOM_ACTIVIDAD, FECHA, HORA, ID_MONITOR, ID_SALA, N_MAX_ALUMNOS) VALUES (?, ?, ?, ?, ?, ?)";
 		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -471,10 +481,12 @@ public class AccesoBBDDLogin {
 		}
 		
 		
-		//MÉTODO PARA COMOROBAR SI UN MISMO TIPO DE ACTIVIDAD ESTÁ DUPLICADA
+		//Método para comprobar si un mismo tipo de actividad está duplicada
+		//-llamado en ControladorBotonAnadir
 		public boolean existeActividadEnMismoHorario(Connection conn, String nombreActividad, String fecha, String hora) {
 		    boolean existe = false;
 
+		    //contamos cuantas actividades coindicen con la actvidad que se pasa como parámetro
 		    String sql = """
 		        SELECT COUNT(*) AS total
 		        FROM actividad
@@ -487,6 +499,8 @@ public class AccesoBBDDLogin {
 		        stmt.setString(3, hora);  // formato: "HH:mm:ss"
 
 		        ResultSet rs = stmt.executeQuery();
+		       //si el resultado de esa cuenta existe ye es mayor que cero significa que la actividad
+		       //que se quiere crear ya existe
 		        if (rs.next() && rs.getInt("total") > 0) {
 		            existe = true;
 		        }
@@ -501,10 +515,15 @@ public class AccesoBBDDLogin {
 
 		
 		//MÉTODO PARA OBTENER LA SALA DE CADA ACTIVIDAD
+		//-llamado en los métodos del panelNuevaActividad
 		public Sala obtenerSalaPorNombreActividad(Connection conn, String nombreActividad) {
 		    Sala sala = null;
 		    try {
-		        String sql = """
+		       //unimos las tablas actividad y sala para obtener la sala donde se realiza
+		       //la actividad que pasamos como parámetro.
+		       //con LIMIT 1 nos aseguramos de que solo se devuelva una sala aunque haya más
+		    	//actividades con ese nombre.
+		    	String sql = """
 		            SELECT s.ID_SALA, s.TIPO_SALA, s.CAPACIDAD
 		            FROM actividad a
 		            JOIN sala s ON a.ID_SALA = s.ID_SALA
@@ -516,6 +535,7 @@ public class AccesoBBDDLogin {
 		        stmt.setString(1, nombreActividad);
 		        ResultSet rs = stmt.executeQuery();
 
+		        //se crea un objeto sala con los resultados
 		        if (rs.next()) {
 		            sala = new Sala(
 		                rs.getInt("ID_SALA"),
@@ -538,6 +558,7 @@ public class AccesoBBDDLogin {
 
 
 		//MÉTODO PARA BORRAR UNA ACTIVIDAD POR ID DE ACTIVIDAD
+		//-llamado desde ControladorBorrar
 		public boolean borrarActividadPorId(Connection conn, int idActividad) {
 		    String sql = "DELETE FROM actividad WHERE ID_ACTIVIDAD = ?";
 		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -551,8 +572,13 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA EDITAR LA FECHA Y HORA DE LA ACTIVIDAD
+		//-llamado en ControladorGuardarCambiosActividad al editar una actividad
 		public boolean actualizarFechaHoraActividad(Connection conn, int idActividad, String nuevaFecha, String nuevaHora) {
-		    String sql = "UPDATE actividad SET FECHA = ?, HORA = ? WHERE ID_ACTIVIDAD = ?";
+		    /* Se actualizan los campos de fecha y hora con los parámetros nuevaFecha y nuevaHora
+		     * de la actividad con el id pasado como parámetro
+		     */
+			
+			String sql = "UPDATE actividad SET FECHA = ?, HORA = ? WHERE ID_ACTIVIDAD = ?";
 		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 		        stmt.setString(1, nuevaFecha);
 		        stmt.setString(2, nuevaHora);
@@ -566,7 +592,7 @@ public class AccesoBBDDLogin {
 		
 		
 		//MÉTODO PARA COMRPOBRAR SI EL MONITOR TIENE CUALQUIER ACTIVIDAD EN ESE HORARIO AL CREAR NUEVA ACTIVIDAD
-		//Se usa al crear una actividad, en el controlador del botón añadir
+		//-llamado en controladorBotonAnadir para comprobar si al monitor se le solapan actividades
 		public boolean monitorTieneActividadEnHorario(Connection conn, int idMonitor, String fecha, String hora) {
 		    String sql = "SELECT COUNT(*) FROM actividad WHERE ID_MONITOR = ? AND FECHA = ? AND HORA = ?";//cuenta las filas
 		    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -584,8 +610,9 @@ public class AccesoBBDDLogin {
 		}
 		
 		
-		//MÉTODO PARA COMPROBAR SI EL MONITOR TIENE CUALQUIER ACTIVIDAD EN ESE HORARIO AL CREAR NUEVA ACTIVIDAD EXCLYENDO LA ACTIVIDAD QUE SE ESTÁ EDITANDO
-		//Se usa al editar una actividad, en el controlador del botón guardar cambios.
+		//MÉTODO PARA COMPROBAR SI EL MONITOR TIENE CUALQUIER ACTIVIDAD EN ESE HORARIO AL CREAR NUEVA ACTIVIDAD EXCLuYENDO LA ACTIVIDAD QUE SE ESTá EDITANDO
+		//-llamado en el controlador del botón guardar cambios para comprobar si el monitor
+		//tiene otra actividad en ese horario pero EXCLUYENDO de la comprobación la actividad actual que se está editando
 		public boolean monitorTieneOtraActividadEnHorario(Connection conn, int idMonitor, String fecha, String hora, int idActividadActual) {
 		    String sql = """
 		        SELECT COUNT(*) FROM actividad

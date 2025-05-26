@@ -11,6 +11,17 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Controlador encargado de gestionar el borrado de una inscripción del usuario en una actividad.
+ * Al pulsar el botón correspondiente, elimina la inscripción del usuario en la base de datos
+ * y actualiza el panel mostrando el nuevo listado de actividades inscritas.
+ *
+ * Este controlador se utiliza en {@link vista.PanelMisActividadesUsuario}.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorBorrarInscripcion implements ActionListener {
 	
 	

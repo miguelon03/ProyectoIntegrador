@@ -8,6 +8,17 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+/**
+ * Panel utilizado por los monitores para visualizar todas las actividades 
+ * registradas en el sistema. Muestra información detallada como nombre, 
+ * fecha, hora, sala y número de inscritos.
+ * 
+ * Este panel es de solo lectura y no permite modificaciones directas sobre 
+ * las actividades.
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelVerActividadesMonitor extends JPanel {
 	
 	 private DefaultListModel<String> modeloLista;

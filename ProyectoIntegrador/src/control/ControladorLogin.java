@@ -13,7 +13,23 @@ import vista.VistaLogin;
 import vista.VistaMenuPrincipalMonitor;
 import vista.VistaMenuPrincipalUsuario;
 
-
+/**
+ * Controlador encargado de gestionar el inicio de sesión de los usuarios en la aplicación.
+ * 
+ * Verifica las credenciales ingresadas a través de la interfaz de login,
+ * consulta la base de datos mediante {@link AccesoBBDDLogin} y redirige al usuario
+ * a la vista correspondiente dependiendo de su ciclo formativo (TAFD, DAW, etc.).
+ * 
+ * Si el usuario pertenece al ciclo TAFD, se muestra una pantalla de elección
+ * que permite acceder como usuario o como monitor.
+ * 
+ * Actúa como puente
+ * entre la vista {@link vista.VistaLogin} y el modelo {@link modelo.Usuario}.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorLogin implements ActionListener {
 	private VistaLogin ventLogin;
 	private VistaMenuPrincipalMonitor ventPpalM;
@@ -29,7 +45,7 @@ public class ControladorLogin implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		//Qué va a hacer este controlador
 		
-		//Pimero obtenemos el usuario y la contraseña
+		//Pimero obtenemos el usuario y la contraseña con los métodos get
 		String user = ventLogin.getUsuario();
 		String password = new String (ventLogin.getPassword().getPassword());
 		
@@ -41,7 +57,7 @@ public class ControladorLogin implements ActionListener {
 		if (conn != null) {// Si la conexion no es nula
 
 			// realizamos la comprobacion del login con el metodo
-			boolean Login = acceso.comrobarLogIn(conn, user, password);
+			boolean Login = acceso.comprobarLogIn(conn, user, password);
 
 			// terminamos la conexion cuando se ha completado la consulta del login
 			acceso.terminarConexion(conn);
@@ -51,14 +67,14 @@ public class ControladorLogin implements ActionListener {
 				JOptionPane.showMessageDialog(ventLogin, "Inicio de sesión correcto");
 				
 				 conn = acceso.getConexion();
-				    //String ciclo = acceso.obtenerCicloUsuario(conn, user);
-				    //acceso.terminarConexion(conn);
+				 
+				 //Creamos un objeto usuario con el método de AccesoBBDDLogin
 				 Usuario usuarioObj = acceso.obtenerUsuarioCompleto(conn, user);
 				    acceso.terminarConexion(conn);
 				
 				ventLogin.dispose();
 				
-				/*Aquí necesito llamar a un metodo de la clase AccesoBBDDLogin para realizar una consulta de que si el ciclo del usuario es TAFAD
+				/*Aquí necesito realizar una consulta de que si el ciclo del usuario es TAFAD
 				 * se abra la pestaña de vista de eleccion ya que los usuarios de este ciclo pueden entrar a la app
 				 * como usuarios normales o como monitores
 				*/

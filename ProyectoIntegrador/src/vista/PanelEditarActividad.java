@@ -7,6 +7,16 @@ import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Panel que permite a un monitor editar la fecha y la hora de una actividad previamente creada.
+ * 
+ * Muestra el nombre de la actividad, los campos de selección de nueva fecha y hora, y un botón para guardar los cambios.
+ * Incluye validaciones para evitar que el monitor asigne una actividad a una fecha u hora pasada o solapada con otra propia.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelEditarActividad extends JPanel {
 
     private JComboBox<String> comboDia, comboMes, comboAnio, comboHora;

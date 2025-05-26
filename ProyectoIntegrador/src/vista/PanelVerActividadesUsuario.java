@@ -9,7 +9,14 @@ import control.ControladorInscripcion;
 import java.awt.*;
 import java.util.List;
 
-
+/**
+ * Panel que muestra al usuario una lista de todas las actividades disponibles 
+ * para inscribirse. Permite seleccionar una actividad y realizar la inscripción 
+ * si hay plazas disponibles.
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelVerActividadesUsuario extends JPanel {
 	
 	//Atributos

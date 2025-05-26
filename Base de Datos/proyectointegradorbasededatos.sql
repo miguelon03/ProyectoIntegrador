@@ -68,14 +68,14 @@ INSERT INTO SALA VALUES (8,'Pista de tenis',4);
 
 
 -- insertamos los datos a la tabla actividad
-INSERT INTO ACTIVIDAD VALUES (1, 'Sesión de entrenamiento', 30, '2025-04-15', '10:00:00', 3, 1);
-INSERT INTO ACTIVIDAD VALUES (2, 'Partido de baloncesto', 20, '2025-04-16', '11:30:00', 4, 2);
-INSERT INTO ACTIVIDAD VALUES (3, 'Partido de pádel', 4, '2025-04-17', '09:00:00', 3, 3);
-INSERT INTO ACTIVIDAD VALUES (4, 'Clase natación', 100, '2025-04-18', '12:00:00', 4, 4);
-INSERT INTO ACTIVIDAD VALUES (5, 'Clase de pilates', 20, '2025-04-19', '08:00:00', 3, 5);
-INSERT INTO ACTIVIDAD VALUES (6, 'Partido de fútbol', 22, '2025-04-20', '17:00:00', 4, 6);
-INSERT INTO ACTIVIDAD VALUES (7, 'Entrenamiento de atletismo', 8, '2025-05-23', '10:00:00', 3, 7);
-INSERT INTO ACTIVIDAD VALUES (8, 'Partido de tenis', 4, '2025-05-22', '10:00:00', 4, 8);
+INSERT INTO ACTIVIDAD VALUES (1, 'Sesión de entrenamiento', 30, '2025-06-15', '10:00:00', 3, 1);
+INSERT INTO ACTIVIDAD VALUES (2, 'Partido de baloncesto', 20, '2025-06-16', '11:00:00', 4, 2);
+INSERT INTO ACTIVIDAD VALUES (3, 'Partido de pádel', 4, '2025-06-17', '09:00:00', 3, 3);
+INSERT INTO ACTIVIDAD VALUES (4, 'Clase natación', 100, '2025-06-18', '12:00:00', 4, 4);
+INSERT INTO ACTIVIDAD VALUES (5, 'Clase de pilates', 20, '2025-06-19', '08:00:00', 3, 5);
+INSERT INTO ACTIVIDAD VALUES (6, 'Partido de fútbol', 22, '2025-06-20', '17:00:00', 4, 6);
+INSERT INTO ACTIVIDAD VALUES (7, 'Entrenamiento de atletismo', 8, '2025-06-23', '10:00:00', 3, 7);
+INSERT INTO ACTIVIDAD VALUES (8, 'Partido de tenis', 4, '2025-06-22', '10:00:00', 4, 8);
 
 
 

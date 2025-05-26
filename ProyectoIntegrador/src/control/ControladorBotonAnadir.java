@@ -11,6 +11,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
+/**
+ * Controlador encargado de gestionar la lógica al pulsar el botón "Añadir" en el panel de nueva actividad.
+ * Verifica que se haya seleccionado una actividad válida, que la fecha sea posterior a la actual,
+ * que no haya otra actividad del mismo tipo en el mismo horario, y que el monitor no tenga ya
+ * asignada otra actividad en ese momento. Si todo es correcto, inserta la nueva actividad en la base de datos.
+ *
+ * Se utiliza dentro de {@link vista.PanelNuevaActividad}.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorBotonAnadir implements ActionListener {
 
     private PanelNuevaActividad panel;
@@ -44,15 +56,17 @@ public class ControladorBotonAnadir implements ActionListener {
         AccesoBBDDLogin acceso = new AccesoBBDDLogin();
 
         try (Connection conn = acceso.getConexion()) {
-            //Comprobamos si existe una actividad igual llamando al método de AccesoBBDD
+            //Comprobamos si existe una actividad cualquiera igual llamando al método de AccesoBBDD
         	boolean yaExiste = acceso.existeActividadEnMismoHorario(conn, actividad, fecha, hora);
 
-            if (yaExiste) {
+        	if (yaExiste) {
                 JOptionPane.showMessageDialog(panel, "Ya existe una actividad con ese nombre en esa fecha y hora.", "Actividad duplicada", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
-            if (acceso.monitorTieneActividadEnHorario(conn, monitor.getIdUsuario(), fecha, hora)) {
+            //Comprobamos al momitor se le solopa la actividad que queremos añadir con otra que dirige
+        	//en la misma fecha y hora
+        	if (acceso.monitorTieneActividadEnHorario(conn, monitor.getIdUsuario(), fecha, hora)) {
                 JOptionPane.showMessageDialog(panel, "Tienes otra actividad con esta fecha y hora.", "Solapamiento", JOptionPane.WARNING_MESSAGE);
                 return;
             }

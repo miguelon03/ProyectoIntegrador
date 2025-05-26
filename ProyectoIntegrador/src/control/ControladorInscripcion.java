@@ -11,6 +11,18 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Controlador que gestiona el proceso de inscripción de un usuario en una actividad.
+ * Verifica si el usuario ya está inscrito o si hay plazas disponibles antes de realizar la inscripción
+ * usando los métodos de {@link bbdd.AccesoBBDDLogin}.
+ * 
+ * Si la inscripción es válida, la registra en la base de datos y muestra un mensaje de confirmación.
+ * En caso contrario, muestra los mensajes de error correspondientes.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorInscripcion implements ActionListener {
 
     private PanelVerActividadesUsuario panel;
@@ -26,6 +38,7 @@ public class ControladorInscripcion implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int seleccion = panel.getListaActividades().getSelectedIndex();
 
+        
         if (seleccion == -1) {
             JOptionPane.showMessageDialog(panel, "Por favor, selecciona una actividad.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;

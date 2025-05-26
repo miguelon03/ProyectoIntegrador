@@ -10,6 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
+/**
+ * Controlador encargado de gestionar la acción de guardar los cambios editados
+ * en una actividad existente, específicamente su fecha y hora.
+ * Valida que la nueva fecha no sea anterior al día actual y que no exista conflicto
+ * de horario con otra actividad del mismo monitor.
+ * Si las validaciones se superan, actualiza la actividad en la base de datos
+ * utilizando {@link bbdd.AccesoBBDDLogin} y actualiza el panel del monitor.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorGuardarCambiosActividad implements ActionListener {
 
     private PanelEditarActividad panel;

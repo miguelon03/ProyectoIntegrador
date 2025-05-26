@@ -11,7 +11,15 @@ import control.ControladorVerSalasMonitor;
 import control.ControladorVerSalasUsuario;
 import modelo.Usuario;
 
-
+/**
+ * Ventana que muestra el menú principal del usuario.
+ * En ella, mediante un menú, se intercambian paneles que muestran distinta iformación sobre
+ * actividades, salas y datos del usuario.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class VistaMenuPrincipalUsuario extends JFrame {
 	JLabel titulo;
 	JScrollPane scrollPaneles;

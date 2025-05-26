@@ -9,6 +9,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
+/**
+ * Controlador que gestiona el proceso de cambio de contraseña del usuario.
+ * Valida que la contraseña actual sea correcta, que la nueva no esté vacía
+ * y que coincida con su confirmación antes de actualizarla en la base de datos.
+ * 
+ * Se asocia al botón correspondiente dentro del {@link vista.PanelDatosPersonales}.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorCambiarContrasena implements ActionListener {
 
     private PanelDatosPersonales panel;

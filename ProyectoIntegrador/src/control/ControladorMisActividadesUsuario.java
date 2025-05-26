@@ -11,6 +11,16 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Controlador que se encarga de mostrar al usuario las actividades en las que está inscrito.
+ * Recupera las actividades desde la base de datos y las presenta en el panel correspondiente.
+ *
+ * Permite también al usuario darse de baja de las actividades desde el mismo panel.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorMisActividadesUsuario implements ActionListener {
 	
 	//Atributos

@@ -7,6 +7,14 @@ import modelo.Usuario;
 
 import java.awt.*;
 
+/**
+ * Panel que muestra los datos personales del usuario, incluyendo nombre, apellidos, ciclo y número de matrícula.
+ * Permite además cambiar la contraseña mediante verificación.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelDatosPersonales extends JPanel {
 
     private JLabel nombreLabel;

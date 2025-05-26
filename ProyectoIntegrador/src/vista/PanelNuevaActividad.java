@@ -14,6 +14,18 @@ import java.util.List;
 import modelo.Sala;
 import modelo.Usuario;
 
+/**
+ * Panel que permite al monitor crear una nueva actividad. Incluye selección 
+ * de tipo de actividad, fecha, hora y sala correspondiente (asociada a la actividad).
+ * 
+ * Valida que la fecha no sea anterior a la actual y que no se duplique la actividad
+ * en el mismo horario. También evita solapamientos para el mismo monitor.
+ * 
+ * Se muestra la sala asignada automáticamente en función del tipo de actividad seleccionada
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class PanelNuevaActividad extends JPanel {
 	
 	private JList<String> listaActividades;
@@ -187,12 +199,17 @@ public class PanelNuevaActividad extends JPanel {
         return btnAnadir;
     }
 
+    //método para mostrar la sala asociada a la actividad en el panel
     private void mostrarSalaAsociada() {
-        String actividad = listaActividades.getSelectedValue();
+        String actividad = listaActividades.getSelectedValue();//obtenemos la actividad seleccionada de la lista
         if (actividad == null) return;
 
         try (Connection conn = acceso.getConexion()) {
-            Sala sala = acceso.obtenerSalaPorNombreActividad(conn, actividad);
+            /*
+             * obtenemos la sala asignada a la actividad seleccionada con el método
+             *  correspondiente en AccesoBBDDLogin
+             */
+        	Sala sala = acceso.obtenerSalaPorNombreActividad(conn, actividad);
             if (sala != null) {
                 lblSalaAsignada.setText(sala.getTipoSala());
             } else {

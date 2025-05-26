@@ -1,6 +1,16 @@
 
 package control;
 
+/**
+ * Controlador que gestiona la acción del botón "Monitor" en la vista de elección.
+ * Cuando se selecciona esta opción, se cierra la vista actual y se muestra el menú principal del monitor.
+ *
+ * Este controlador se utiliza en {@link vista.VistaEleccion} para los usuarios del ciclo TAFD.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

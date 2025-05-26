@@ -11,6 +11,16 @@ import modelo.Usuario;
 
 import java.awt.*;
 
+/**
+ * Ventana que muestra el menú principal del monitor.
+ * En ella, mediante un menú, se intercambian paneles que muestran distinta iformación sobre
+ * actividades, salas y datos del usuario. La principal diferencia respecto al menú principal
+ * del monitor es que permite crear nuevas actividades.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class VistaMenuPrincipalMonitor extends JFrame {
 	JScrollPane scrollPaneles;
 	private Usuario usuario;

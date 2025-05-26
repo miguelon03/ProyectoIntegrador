@@ -5,6 +5,15 @@ import control.ControladorLogin;
 
 import java.awt.*;
 
+/**
+ * Ventana que muestra el inicio de sesión de la apliacación.
+ * En ella, el usuario debe introducir el ID de usuario y la contraseña correspondiente para 
+ * acceder al menú de la aplicación.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class VistaLogin extends JFrame {
 	private JLabel lblUsuario;
 	private JLabel lblPassword;

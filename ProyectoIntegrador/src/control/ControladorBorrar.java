@@ -9,6 +9,17 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.util.List;
 
+/**
+ * Controlador encargado de gestionar el borrado de actividades de un monitor.
+ * Al pulsar el botón correspondiente, elimina la actividad seleccionada de la base de datos
+ * y actualiza la lista mostrada en el panel.
+ *
+ * Este controlador se utiliza en {@link vista.PanelMisActividadesMonitor}..
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorBorrar implements ActionListener {
 
     private JButton boton;

@@ -12,6 +12,16 @@ import modelo.Usuario;
 import vista.VistaMenuPrincipalMonitor;
 import vista.PanelMisActividadesMonitor;
 
+/**
+ * Controlador que gestiona la visualización de las actividades asociadas al monitor que ha iniciado sesión.
+ * Carga las actividades del monitor desde la base de datos y muestra el panel correspondiente.
+ *
+ * Permite también acceder a funciones como editar o borrar actividades desde el panel mostrado.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorMisActividadesMonitor implements ActionListener {
 
     private VistaMenuPrincipalMonitor vista;

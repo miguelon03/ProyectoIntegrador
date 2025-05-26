@@ -10,6 +10,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Controlador que gestiona el evento del botón "Editar" en el panel de actividades del monitor.
+ * Al pulsar el botón, recupera la actividad seleccionada de la lista y abre el panel
+ * {@link vista.PanelEditarActividad} para permitir la edición de la fecha y hora de la actividad.
+ * Se asegura de que haya una actividad seleccionada antes de realizar la acción.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class ControladorEditarActividadMonitor implements ActionListener {
 
     private JList<String> listaVisual;

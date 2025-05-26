@@ -5,6 +5,14 @@ import javax.swing.*;
 
 import modelo.Usuario;
 
+/**
+ * Ventana que muestra las opciones de acceso de un usuario del ciclo TAFD (monitor o usuario).
+ * Dependiendo de la opción que escoja mediante botones accederá al menú principal de monitor o al de usuario.
+ * 
+ * @author Antonio Alonso
+ * @author Miguel De Pablo
+ * @author Juan José González
+ */
 public class VistaEleccion extends JFrame {
 	private JButton botonMonitor;
 	private JButton botonUsuario;
